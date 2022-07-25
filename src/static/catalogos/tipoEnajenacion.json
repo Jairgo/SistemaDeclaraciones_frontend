@@ -1,0 +1,15 @@
+[
+    {
+      "clave": "MUE",
+      "valor": "MUEBLE"
+    },
+    {
+      "clave": "INM",
+      "valor": "INMUBLE"
+    },
+    {
+      "clave": "VEH",
+      "valor": "VEHICULO"
+    }
+  ]
+  
