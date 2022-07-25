@@ -62,10 +62,17 @@
 
       <mat-divider></mat-divider>
 
-      <div class="bloque">
+      <div class="bloque" *ngIf="tipoDeclaracion === 'modificacion' || tipoDeclaracion === 'conclusion'">
+        <h3>II. Otros ingresos del declarante (suma del II.1 al II.5)</h3>
+        <p class="total">{{ otrosIngresosDeclarante | currency }}</p>
+      </div>
+
+      <div class="bloque" *ngIf="tipoDeclaracion === 'inicial'">
         <h3>II. Otros ingresos del declarante (suma del II.1 al II.4)</h3>
         <p class="total">{{ otrosIngresosDeclarante | currency }}</p>
       </div>
+
+   
 
       <mat-divider></mat-divider>
 
@@ -203,11 +210,58 @@
           <mat-icon matSofix>add</mat-icon>
         </button>
       </div>
+      <!-- AGREGADO POR LA SECRETARIA EJECUTIVA-->
+      <mat-divider></mat-divider>
+      <div class="bloque text-right" formGroupName="actividadEnajenacion" *ngIf="tipoDeclaracion === 'modificacion' || tipoDeclaracion === 'conclusion'">
+        <h3 class="text-left">II.4. Por enajenacion de bienes (después de impuestos)</h3>
+        <div formArrayName="actividades"> 
+          <div *ngFor="let actividad of actividadEnajenacion.controls; let i = index">
+            <div class="grid-2-col" [formGroupName]="i">
+              <mat-form-field
+                matTooltip="{{ tooltipData.otrosIngresos.actividadEnajenacion.actividadEnajenacion }}"
+                appearance="fill"
+                formGroupName="remuneracion"
+              >
+                <mat-label>Monto</mat-label>
+                <input [errorStateMatcher]="errorMatcher" matInput type="number" formControlName="valor" min="0" />
+                <mat-icon matPrefix>attach_money</mat-icon>
+              </mat-form-field>
 
+              <mat-form-field
+                matTooltip="{{ tooltipData.otrosIngresos.actividadEnajenacion.tipoEnajenacion }}"
+                appearance="fill"
+              >
+                <mat-label>Tipo de bien enajenado</mat-label>
+                <mat-icon matPrefix>wb_iridescent</mat-icon>
+                <mat-select formControlName="tipoEnajenacion">
+                  <mat-option *ngFor="let enajenacion of tipoEnajenacionCatalogo" [value]="enajenacion">
+                    {{ enajenacion.valor }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <button
+              class="delete-button"
+              mat-button
+              type="button"
+              color="warn"
+              (click)="deleteFormArrayItem('actividadEnajenacion', i)"
+            >
+              Eliminar <mat-icon matSofix>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+        <button mat-button type="button" color="primary" (click)="addActividadEnajenacion()">
+          Agregar
+          <mat-icon matSofix>add</mat-icon>
+        </button>
+      </div>
+      <!-- AGREGADO POR LA SECRETARIA EJECUTIVA-->
       <mat-divider></mat-divider>
 
       <div class="bloque text-right" formGroupName="otrosIngresos">
-        <h3 class="text-left">II.4. Otros ingresos no considerados a los anteriores (después de impuestos)</h3>
+        <h3 class="text-left" *ngIf="tipoDeclaracion === 'modificacion' || tipoDeclaracion === 'conclusion'">II.5. Otros ingresos no considerados a los anteriores (después de impuestos)</h3>
+        <h3 class="text-left" *ngIf="tipoDeclaracion === 'inicial'">II.4. Otros ingresos no considerados a los anteriores (después de impuestos)</h3>
         <div formArrayName="ingresos">
           <div *ngFor="let ingreso of otrosIngresos.controls; let i = index">
             <div class="grid-2-col" [formGroupName]="i">

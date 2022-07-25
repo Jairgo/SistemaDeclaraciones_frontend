@@ -172,7 +172,7 @@ $mat-dark-theme-background: (
 // Theme Config
 
 body {
-  --primary-color: #FEA142;
+  --primary-color: #fea142;
   --primary-lighter-color: #f6b675;
   --primary-darker-color: #fa9632;
   --text-primary-color: #{$light-primary-text};
@@ -181,10 +181,10 @@ body {
 }
 
 $mat-primary: (
-  main: #FEA142,
+  main: #fea142,
   lighter: #f6b675,
   darker: #fa9632,
-  200: #FEA142,
+  200: #fea142,
   // For slide toggle,
   contrast:
     (
@@ -196,19 +196,19 @@ $mat-primary: (
 $theme-primary: mat-palette($mat-primary, main, lighter, darker);
 
 body {
-  --accent-color: #E2E2E2;
-  --accent-lighter-color: #E2E2E2;
-  --accent-darker-color: #E2E2E2;
+  --accent-color: #e2e2e2;
+  --accent-lighter-color: #e2e2e2;
+  --accent-darker-color: #e2e2e2;
   --text-accent-color: #{$dark-primary-text};
   --text-accent-lighter-color: #{$dark-primary-text};
   --text-accent-darker-color: #{$light-primary-text};
 }
 
 $mat-accent: (
-  main: #E2E2E2,
-  lighter: #E2E2E2,
-  darker: #E2E2E2,
-  200: #E2E2E2,
+  main: #e2e2e2,
+  lighter: #e2e2e2,
+  darker: #e2e2e2,
+  200: #e2e2e2,
   // For slide toggle,
   contrast:
     (

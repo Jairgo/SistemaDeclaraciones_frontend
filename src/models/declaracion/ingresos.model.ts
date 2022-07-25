@@ -1,4 +1,5 @@
 import {
+  ActividadEnajenacionTotal,
   ActividadFinancieraTotal,
   ActividadIndustrialTotal,
   OtrosIngresosTotal,
@@ -11,6 +12,7 @@ export interface Ingresos {
   otrosIngresosMensualesTotal: Monto;
   actividadIndustrialComercialEmpresarial: ActividadIndustrialTotal;
   actividadFinanciera: ActividadFinancieraTotal;
+  actividadEnajenacion: ActividadEnajenacionTotal;
   serviciosProfesionales: ServiciosProfesionalesTotal;
   otrosIngresos: OtrosIngresosTotal;
   ingresoMensualNetoDeclarante: Monto;

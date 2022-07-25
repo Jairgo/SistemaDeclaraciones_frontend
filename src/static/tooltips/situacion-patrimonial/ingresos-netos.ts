@@ -14,6 +14,10 @@ const tooltipData = {
       tipoInstrumento:
         'Deberá seleccionar el instrumento que generó el rendimiento o ganancia de las siguientes opciones: capital, fondos de inversión, organizaciones privadas, seguro de separación individualizado, valores bursátiles, bonos y/u otros (especifique).',
     },
+    actividadEnajenacion: {
+      actividadEnajenacion: 'Señalar el monto neto que obtenga por la venta de bienes.',
+      tipoEnajenacion: 'Debera seleccionar el tipo de bien vendido, mueble, inmueble o vehiculo.',
+    },
     servicios: {
       servicios:
         'Señalar el monto neto, que obtenga derivado de servicios profesionales distintos al empleo, cargo o comisión que desempeñe, por su participación en consejos o consultorías, y/o por asesorías que le generen alguna remuneración económica.',

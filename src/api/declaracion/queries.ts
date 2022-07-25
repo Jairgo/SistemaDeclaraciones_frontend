@@ -100,6 +100,22 @@ export const actividadAnualAnteriorQuery = gql`
             }
           }
         }
+        actividadEnajenacion {
+          remuneracionTotal {
+            valor
+            moneda
+          }
+          actividades {
+            remuneracion {
+              valor
+              moneda
+            }
+            tipoEnajenacion {
+              clave
+              valor
+            }
+          }
+        }
         serviciosProfesionales {
           remuneracionTotal {
             valor
@@ -720,6 +736,22 @@ export const ingresosQuery = gql`
               moneda
             }
             tipoInstrumento {
+              clave
+              valor
+            }
+          }
+        }
+        actividadEnajenacion {
+          remuneracionTotal {
+            valor
+            moneda
+          }
+          actividades {
+            remuneracion {
+              valor
+              moneda
+            }
+            tipoEnajenacion {
               clave
               valor
             }

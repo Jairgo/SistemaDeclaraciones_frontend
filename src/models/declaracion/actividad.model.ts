@@ -4,7 +4,10 @@ export interface ActividadFinanciera {
   remuneracion: Monto;
   tipoInstrumento: Catalogo;
 }
-
+export interface ActividadEnajenacion {
+  remuneracion: Monto;
+  tipoEnajenacion: Catalogo;
+}
 export interface ActividadIndustrial {
   remuneracion: Monto;
   nombreRazonSocial: string;
@@ -29,6 +32,10 @@ export interface ServiciosProfesionales {
 export interface ActividadFinancieraTotal {
   remuneracionTotal: Monto;
   actividades: ActividadFinanciera[];
+}
+export interface ActividadEnajenacionTotal {
+  remuneracionTotal: Monto;
+  actividades: ActividadEnajenacion[];
 }
 
 export interface ActividadIndustrialTotal {

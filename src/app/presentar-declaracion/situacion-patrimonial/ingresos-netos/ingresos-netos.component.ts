@@ -13,6 +13,7 @@ import { DeclarationErrorStateMatcher } from '@app/presentar-declaracion/shared-
 import { UntilDestroy, untilDestroyed } from '@core';
 import {
   ActividadFinanciera,
+  ActividadEnajenacion,
   ActividadIndustrial,
   DeclaracionOutput,
   Ingresos,
@@ -20,6 +21,7 @@ import {
   ServiciosProfesionales,
 } from '@models/declaracion';
 import TipoInstrumento from '@static/catalogos/tipoInstrumento.json';
+import TipoEnajenacion from '@static/catalogos/tipoEnajenacion.json';
 import { tooltipData } from '@static/tooltips/situacion-patrimonial/ingresos-netos';
 import { findOption } from '@utils/utils';
 
@@ -39,6 +41,7 @@ export class IngresosNetosComponent implements OnInit {
   ingresosTotales = 0;
 
   tipoInstrumentoCatalogo = TipoInstrumento;
+  tipoEnajenacionCatalogo = TipoEnajenacion;
 
   declaracionSimplificada = false;
   tipoDeclaracion: string = null;
@@ -70,6 +73,18 @@ export class IngresosNetosComponent implements OnInit {
           moneda: ['MXN'],
         }),
         tipoInstrumento: [null, [Validators.required]],
+      })
+    );
+  }
+
+  addActividadEnajenacion() {
+    this.actividadEnajenacion.push(
+      this.formBuilder.group({
+        remuneracion: this.formBuilder.group({
+          valor: [0, [Validators.required, Validators.pattern(/^\d+$/), Validators.min(0)]],
+          moneda: ['MXN'],
+        }),
+        tipoEnajenacion: [null, [Validators.required]],
       })
     );
   }
@@ -115,6 +130,7 @@ export class IngresosNetosComponent implements OnInit {
     const total = [
       'actividadIndustrialComercialEmpresarial',
       'actividadFinanciera',
+      'actividadEnajenacion',
       'otrosIngresos',
       'serviciosProfesionales',
     ].reduce((accum: number, section: string) => accum + this.calcTotalAmountOfSection(section), 0);
@@ -132,6 +148,9 @@ export class IngresosNetosComponent implements OnInit {
       case 'actividadFinanciera':
         formArray = this.actividadFinanciera;
         break;
+      case 'actividadEnajenacion':
+        formArray = this.actividadEnajenacion;
+        break;
       case 'otrosIngresos':
         formArray = this.otrosIngresos;
         break;
@@ -143,8 +162,15 @@ export class IngresosNetosComponent implements OnInit {
     }
 
     const total = formArray.value.reduce(
-      (accum: number, current: ActividadIndustrial | ActividadFinanciera | OtrosIngresos | ServiciosProfesionales) =>
-        accum + current.remuneracion.valor,
+      (
+        accum: number,
+        current:
+          | ActividadIndustrial
+          | ActividadFinanciera
+          | ActividadEnajenacion
+          | OtrosIngresos
+          | ServiciosProfesionales
+      ) => accum + current.remuneracion.valor,
       0
     );
     return total;
@@ -168,6 +194,7 @@ export class IngresosNetosComponent implements OnInit {
           'actividadIndustrialComercialEmpresarial'
         );
         form.actividadFinanciera.remuneracionTotal.valor = this.calcTotalAmountOfSection('actividadFinanciera');
+        form.actividadEnajenacion.remuneracionTotal.valor = this.calcTotalAmountOfSection('actividadEnajenacion');
         form.otrosIngresos.remuneracionTotal.valor = this.calcTotalAmountOfSection('otrosIngresos');
         form.serviciosProfesionales.remuneracionTotal.valor = this.calcTotalAmountOfSection('serviciosProfesionales');
         //totals
@@ -197,6 +224,13 @@ export class IngresosNetosComponent implements OnInit {
         actividades: this.formBuilder.array([]),
       }),
       actividadFinanciera: this.formBuilder.group({
+        remuneracionTotal: this.formBuilder.group({
+          valor: [0, [Validators.pattern(/^\d+$/), Validators.min(0)]],
+          moneda: ['MXN'],
+        }),
+        actividades: this.formBuilder.array([]),
+      }),
+      actividadEnajenacion: this.formBuilder.group({
         remuneracionTotal: this.formBuilder.group({
           valor: [0, [Validators.pattern(/^\d+$/), Validators.min(0)]],
           moneda: ['MXN'],
@@ -249,6 +283,9 @@ export class IngresosNetosComponent implements OnInit {
       case 'actividadFinanciera':
         formArray = this.actividadFinanciera;
         break;
+      case 'actividadEnajenacion':
+        formArray = this.actividadEnajenacion;
+        break;
       case 'otrosIngresos':
         formArray = this.otrosIngresos;
         break;
@@ -277,7 +314,9 @@ export class IngresosNetosComponent implements OnInit {
 
   fillFormArray(
     formArrayName: string,
-    data: Array<ActividadIndustrial | ActividadFinanciera | OtrosIngresos | ServiciosProfesionales>
+    data: Array<
+      ActividadIndustrial | ActividadFinanciera | ActividadEnajenacion | OtrosIngresos | ServiciosProfesionales
+    >
   ) {
     let formArray: FormArray = null;
 
@@ -290,6 +329,10 @@ export class IngresosNetosComponent implements OnInit {
         case 'actividadFinanciera':
           this.addActividadFinanciera();
           formArray = this.actividadFinanciera;
+          break;
+        case 'actividadEnajenacion':
+          this.addActividadEnajenacion();
+          formArray = this.actividadEnajenacion;
           break;
         case 'otrosIngresos':
           this.addOtrosIngresos();
@@ -310,6 +353,12 @@ export class IngresosNetosComponent implements OnInit {
           .at(index)
           .get('tipoInstrumento')
           .setValue(findOption(this.tipoInstrumentoCatalogo, tipoInstrumento?.clave));
+      } else if (formArrayName === 'actividadEnajenacion') {
+        const { tipoEnajenacion } = formArray.at(index).value;
+        formArray
+          .at(index)
+          .get('tipoEnajenacion')
+          .setValue(findOption(this.tipoEnajenacionCatalogo, tipoEnajenacion?.clave));
       }
     }
   }
@@ -320,6 +369,7 @@ export class IngresosNetosComponent implements OnInit {
     [
       'actividadIndustrialComercialEmpresarial',
       'actividadFinanciera',
+      'actividadEnajenacion',
       'otrosIngresos',
       'serviciosProfesionales',
     ].forEach((section) => {
@@ -329,6 +379,9 @@ export class IngresosNetosComponent implements OnInit {
       switch (section) {
         case 'actividadIndustrialComercialEmpresarial':
         case 'actividadFinanciera':
+          dataArray = data.actividades;
+          break;
+        case 'actividadEnajenacion':
           dataArray = data.actividades;
           break;
         case 'otrosIngresos':
@@ -349,6 +402,9 @@ export class IngresosNetosComponent implements OnInit {
 
   get actividadFinanciera() {
     return this.ingresosForm.get('actividadFinanciera.actividades') as FormArray;
+  }
+  get actividadEnajenacion() {
+    return this.ingresosForm.get('actividadEnajenacion.actividades') as FormArray;
   }
 
   get actividadIndustrialComercialEmpresarial() {
