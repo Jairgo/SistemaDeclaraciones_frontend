@@ -1,4 +1,4 @@
-import { DomicilioExtranjero, DomicilioMexico } from './common.model';
+import { DomicilioExtranjero, DomicilioMexico, OtroEmpleoCargoComision } from './common.model';
 import { AmbitoPublico, NivelOrdenGobierno, TipoOperacion } from './types';
 
 interface TelefonoOficina {
@@ -22,4 +22,5 @@ export interface DatosEmpleoCargoComision {
   domicilioExtranjero?: DomicilioExtranjero;
   aclaracionesObservaciones?: string;
   cuentaConOtroCargoPublico?: boolean;
+  otroEmpleoCargoComision?: OtroEmpleoCargoComision;
 }

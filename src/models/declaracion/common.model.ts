@@ -27,12 +27,12 @@ export interface Catalogo {
 }
 
 export interface DomicilioExtranjero {
+  pais: string;
   calle: string;
   numeroExterior: string;
   numeroInterior: string;
   ciudadLocalidad: string;
   estadoProvincia: string;
-  pais: string;
   codigoPostal: string;
 }
 
@@ -72,4 +72,25 @@ export interface Transmisor {
 export interface Ubicacion {
   pais: string;
   entidadFederativa: Catalogo;
+}
+
+export interface OtroEmpleoCargoComision {
+  nivelOrdenGobierno?: NivelOrdenGobierno;
+  ambitoPublico?: AmbitoPublico;
+  nombreEntePublico?: string;
+  areaAdscripcion?: string;
+  empleoCargoComision?: string;
+  contratadoPorHonorarios?: boolean;
+  nivelEmpleoCargoComision?: string;
+  funcionPrincipal?: string;
+  fechaTomaPosesion?: string;
+  telefonoOficina?: TelefonoOficina;
+  domicilioMexico?: DomicilioMexico;
+  domicilioExtranjero?: DomicilioExtranjero;
+  aclaracionesObservaciones?: string;
+}
+
+interface TelefonoOficina {
+  telefono: string;
+  extension: string;
 }

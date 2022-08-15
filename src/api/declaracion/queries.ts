@@ -496,16 +496,56 @@ export const datosEmpleoCargoComisionQuery = gql`
           codigoPostal
         }
         domicilioExtranjero {
+          pais
           calle
           numeroExterior
           numeroInterior
           ciudadLocalidad
-          estadoProvincia
-          pais
+          estadoProvincia          
           codigoPostal
         }
         aclaracionesObservaciones
-        cuentaConOtroCargoPublico
+        cuentaConOtroCargoPublico        
+        otroEmpleoCargoComision {
+          nivelOrdenGobierno
+          ambitoPublico
+          nombreEntePublico
+          areaAdscripcion
+          empleoCargoComision
+          contratadoPorHonorarios
+          nivelEmpleoCargoComision
+          funcionPrincipal
+          fechaTomaPosesion
+          telefonoOficina {
+            telefono
+            extension
+          }
+          domicilioMexico {
+            calle
+            numeroExterior
+            numeroInterior
+            coloniaLocalidad
+            municipioAlcaldia {
+              clave
+              valor
+            }
+            entidadFederativa {
+              clave
+              valor
+            }
+            codigoPostal
+          }
+          domicilioExtranjero {
+            pais
+            calle
+            numeroExterior
+            numeroInterior
+            ciudadLocalidad
+            estadoProvincia            
+            codigoPostal
+          }
+          aclaracionesObservaciones          
+        }
       }
     }
   }
