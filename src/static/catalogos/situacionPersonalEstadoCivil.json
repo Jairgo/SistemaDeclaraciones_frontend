@@ -3,6 +3,6 @@
   { "clave": "CAS", "valor": "CASADO (A)" },
   { "clave": "DIV", "valor": "DIVORCIADO (A)" },
   { "clave": "VIU", "valor": "VIUDO (A)" },
-  { "clave": "CON", "valor": "CONCUBINA/CONCUBINARIO/UNIÓN LIBRE" },
+  { "clave": "CON", "valor": "CONCUBINA/CONCUBINARIO/UNIÓN LIBRE" },
   { "clave": "SCO", "valor": "SOCIEDAD DE CONVIVENCIA" }
 ]
