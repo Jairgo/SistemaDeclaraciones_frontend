@@ -100,7 +100,7 @@ export class SectionFooterComponent implements OnInit {
           });
         } catch (error) {
           console.log(error);
-          this.openSnackBar('ERROR: No pudo firmar la declaración', 'Aceptar');
+          this.openSnackBar('ERROR: No pudo firmar la declaración. ' + error, 'Aceptar');
         }
       }
     });
