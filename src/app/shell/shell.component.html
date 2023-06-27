@@ -8,7 +8,7 @@
       [disableClose]="!isMobile"
       ngClass.gt-sm="has-border"
     >
-      <mat-expansion-panel>
+      <mat-expansion-panel [expanded]="true">
         <mat-expansion-panel-header
           [ngClass]="{
             active:
@@ -30,7 +30,7 @@
         </mat-vertical-stepper>
       </mat-expansion-panel>
 
-      <mat-expansion-panel *ngIf="!declaracionSimplificada">
+      <mat-expansion-panel *ngIf="!declaracionSimplificada" [expanded]="true">
         <mat-expansion-panel-header [ngClass]="{ active: url?.startsWith('/' + tipoDeclaracion + '/intereses') }">
           <mat-panel-title> II. Declaración de intereses </mat-panel-title>
         </mat-expansion-panel-header>
